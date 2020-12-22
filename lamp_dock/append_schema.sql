@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- ホスト: mysql
--- 生成日時: 2020 年 12 月 19 日 03:10
+-- 生成日時: 2020 年 12 月 22 日 06:09
 -- サーバのバージョン： 5.7.32
 -- PHP のバージョン: 7.4.11
 
@@ -43,11 +43,11 @@ CREATE TABLE `carts` (
 --
 
 CREATE TABLE `details` (
+  `details_id` int(11) NOT NULL,
   `item_id` int(11) NOT NULL,
   `price` int(11) NOT NULL,
   `amount` int(11) NOT NULL,
-  `order_id` int(11) NOT NULL,
-  `createdate` datetime NOT NULL
+  `order_id` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- --------------------------------------------------------
@@ -123,6 +123,12 @@ ALTER TABLE `carts`
   ADD KEY `user_id` (`user_id`);
 
 --
+-- テーブルのインデックス `details`
+--
+ALTER TABLE `details`
+  ADD PRIMARY KEY (`details_id`);
+
+--
 -- テーブルのインデックス `history`
 --
 ALTER TABLE `history`
@@ -149,6 +155,12 @@ ALTER TABLE `users`
 --
 ALTER TABLE `carts`
   MODIFY `cart_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+
+--
+-- テーブルの AUTO_INCREMENT `details`
+--
+ALTER TABLE `details`
+  MODIFY `details_id` int(11) NOT NULL AUTO_INCREMENT;
 
 --
 -- テーブルの AUTO_INCREMENT `history`
