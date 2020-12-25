@@ -105,6 +105,7 @@ function purchase_carts($db, $carts){
   if(validate_cart_purchase($carts) === false){
     return false;
   }
+  $db -> beginTransaction();
   foreach($carts as $cart){
     if(update_item_stock(
         $db, 
@@ -113,8 +114,14 @@ function purchase_carts($db, $carts){
       ) === false){
       set_error($cart['name'] . 'の購入に失敗しました。');
     }
+    if(create_history($db,$carts) === false){
+      has_error('データ登録に失敗しました。');
+    }
+    $db -> commit();
+    return true;
   }
-  
+  $db -> rollback();
+  return true;
   delete_user_carts($db, $carts[0]['user_id']);
 }
 
