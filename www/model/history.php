@@ -18,8 +18,8 @@ function add_details_query($db,$item_id,$price,$amount,$order_id){
     INSERT INTO
       details(
         item_id,
-        price
-        amount
+        price,
+        amount,
         order_id
       )
     VALUES(?,?,?,?);
@@ -41,7 +41,7 @@ function create_history($db,$carts){
       $cart['item_id'],
       $cart['price'],
       $cart['amount'],
-      $cart['order_id']
+      $order_id
       ) === false){
     set_error('購入詳細テーブルの作成に失敗しました。');
     return false;
