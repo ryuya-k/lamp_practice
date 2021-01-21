@@ -82,6 +82,7 @@ function get_user_history($db, $user_id,$order_id=null)
 }
 function get_admin_history($db,$order_id=null)
 {
+  $param = [];
   $sql = "
     SELECT
       history.order_id,
@@ -95,6 +96,7 @@ function get_admin_history($db,$order_id=null)
       history.order_id = details.order_id";
   if($order_id !== null){
         $sql.=' and history.order_id=?';
+        $param[]=$order_id;
   }    
   $sql.="
     GROUP BY
@@ -102,7 +104,7 @@ function get_admin_history($db,$order_id=null)
     ORDER BY
       order_id DESC
   ";
-  return fetch_all_query($db, $sql);
+  return fetch_all_query($db, $sql, $param);
 }
 function get_details($db,$order_id,$user_id=null)
 {
