@@ -14,6 +14,7 @@
     <h1>商品一覧</h1>
     <?php include VIEW_PATH . 'templates/messages.php'; ?>
 
+    
     <div class="card-deck">
       <div class="row">
       <?php foreach($items as $item){ ?>
@@ -35,6 +36,26 @@
                 <?php } else { ?>
                   <p class="text-danger">現在売り切れです。</p>
                 <?php } ?>
+              </figcaption>
+            </figure>
+          </div>
+        </div>
+      <?php } ?>
+      </div>
+    </div>
+    <h1>ランキング</h1>
+    <div class="card-deck">
+      <div class="row">
+      <?php foreach($rank as $item){ ?>
+        <div class="col-6 item">
+          <div class="card h-100 text-center">
+            <div class="card-header">
+              <?php print(h($item['name'])); ?>
+            </div>
+            <figure class="card-body">
+              <img class="card-img" src="<?php print(IMAGE_PATH . h($item['image'])); ?>">
+              <figcaption>
+                <?php print(number_format(h($item['price']))); ?>円
               </figcaption>
             </figure>
           </div>
